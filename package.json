@@ -1,0 +1,21 @@
+{
+  "name": "emailservice",
+  "version": "1.0.0",
+  "description": "mail service",
+  "main": "api.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start" : "./node_modules/.bin/netlify-lambda serve src",
+    "build" : "./node_modules/.bin/netlify-lambda build src"
+
+  },
+  "author": "PJ Mahloko",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "netlify-lambda": "^2.0.16",
+    "nodemailer": "^6.9.14",
+    "serverless-http": "^3.2.0"
+  }
+}
