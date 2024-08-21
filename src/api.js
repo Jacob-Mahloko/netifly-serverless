@@ -5,7 +5,24 @@ require('dotenv').config();
 
 const app = express();
 
-app.use(express.json())
+app.use(express.json());
+
+const validateApiKey = async (req, res, next) => {
+  const apiKey = req.header('Authorization');
+  if (!apiKey) {
+    return res.status(401).json({ error: 'API key required' });
+  }
+
+  
+  if (apiKey !== process.env.API_KEY) {
+    console.log(apiKey,process.env.API_KEY)
+    return res.status(401).json({ error: 'Invalid API key' });
+  }
+  next();
+};
+
+app.use(validateApiKey)
+
 app.get("/api", async (req,res)=>{
   res.status(200).send('Welcome to STMP server')
 })
