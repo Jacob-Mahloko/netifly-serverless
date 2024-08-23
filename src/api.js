@@ -1,10 +1,12 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
 const serverless = require('serverless-http');
+const cors = require('cors');
 require('dotenv').config();
 
 const app = express();
 
+app.use(cors)
 app.use(express.json());
 
 const validateApiKey = async (req, res, next) => {
