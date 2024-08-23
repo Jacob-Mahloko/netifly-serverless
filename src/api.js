@@ -6,18 +6,17 @@ require('dotenv').config();
 
 const app = express();
 
-//app.use(cors)
+app.use(cors())
 app.use(express.json());
 
 const validateApiKey = async (req, res, next) => {
-  const apiKey = req.header('Authorization');
+  const apiKey = req.header('x-api-key');
   if (!apiKey) {
     return res.status(401).json({ error: 'API key required' });
   }
 
   
   if (apiKey !== process.env.API_KEY) {
-    console.log(apiKey,process.env.API_KEY)
     return res.status(401).json({ error: 'Invalid API key' });
   }
   next();
@@ -31,7 +30,6 @@ app.get("/api", async (req,res)=>{
 
 app.post("/api/send-email", async (req, res) => {
   const { to, subject, body } = req.body;
-
   let transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',  // SMTP server host
     port: 465,               // Port for SSL
